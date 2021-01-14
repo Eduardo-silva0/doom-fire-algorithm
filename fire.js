@@ -1,6 +1,6 @@
 const firePixelsArray = []
-const fireWigth = 2
-const fireHeight = 3
+const fireWigth = 9
+const fireHeight = 10
 
 function Start() {
   createFireDataStructure()
@@ -13,7 +13,7 @@ function createFireDataStructure() {
   for (let i = 0; i < numberOfPixels; i++) {
     firePixelsArray[i] = 0
   }
-  
+
 }
 
 function calculateFirePropagation() {
@@ -28,9 +28,11 @@ function renderFire() {
 
     for (let column = 0; column < fireWigth; column++) {
       const pixelIndex = column + ( fireWigth * row )
+      const fireIntensity = firePixelsArray[pixelIndex]
 
       html += '<td>'
-      html += pixelIndex
+      html += `<div class="pixel-index">${pixelIndex}</div>`;
+      html += fireIntensity
       html += '</td>'
     }
     html += '</tr>'
