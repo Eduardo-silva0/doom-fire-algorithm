@@ -1,14 +1,15 @@
 const firePixelsArray = []
-const fireWigth = 9
+const fireWidth = 10
 const fireHeight = 10
 
 function Start() {
   createFireDataStructure()
+  createFireSource()
   renderFire()
 }
 
 function createFireDataStructure() {
-  const numberOfPixels = fireWigth * fireHeight
+  const numberOfPixels = fireWidth * fireHeight
 
   for (let i = 0; i < numberOfPixels; i++) {
     firePixelsArray[i] = 0
@@ -26,8 +27,8 @@ function renderFire() {
   for (let row = 0; row < fireHeight; row++) {
     html += '<tr>'
 
-    for (let column = 0; column < fireWigth; column++) {
-      const pixelIndex = column + ( fireWigth * row )
+    for (let column = 0; column < fireWidth; column++) {
+      const pixelIndex = column + ( fireWidth * row )
       const fireIntensity = firePixelsArray[pixelIndex]
 
       html += '<td>'
@@ -41,6 +42,15 @@ function renderFire() {
   html += '</table>'
 
   document.querySelector('#fireCanvas').innerHTML = html
+}
+
+function createFireSource() {
+  for (let column = 0; column <= fireWidth; column++) {
+    const overflowPixelIndex = fireWidth * fireHeight
+    const pixelIndex = (overflowPixelIndex - fireWidth) + column
+
+    firePixelsArray[pixelIndex] = 36
+  }
 }
 
 Start()
